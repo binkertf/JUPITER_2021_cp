@@ -1,0 +1,78 @@
+CoordType		Spherical
+CoordPermut        	213   # Azimuth, Radius and Colatitude
+
+#Size1                  680
+Size1            	2
+Size2            	215   # Strangely, below 120 cells, it crashes
+Size3            	40
+
+Range2Low        	0.40005
+Range2High        	2.3845
+
+Range1Low        	-3.141592653
+Range1High        	3.141592653
+
+Range3Low               1.4415764
+Range3High              1.57079632679489
+
+NDIM            	3
+
+R0                     7.48e14   #50au
+XMSTAR		       1.0
+#PLANETMASS             0.0
+PLANETMASS              1.0e-3
+MASSTAPER               100
+ASPECTRATIO             0.05
+Viscosity               1.0e-5
+SIGMA0                  3.182e-3
+SIGMASLOPE              0.5
+
+PotentialCode           planet3d
+ExternalPotential       True
+
+Dim1Periodic            True
+OmegaFrame              1.0004998750624609
+OUTPUTDIR               /e/ocean1/fbinkert/adiab_nodiff/m50au1jup_highres
+Keplerian               True
+
+STELLAR                 YES
+HALFDISK                YES
+ADIABATIC               YES
+GAMMA	                1.43
+SMRATIO			2.0
+RIEMANNSOLVER		2S
+
+InitCode                kepler3d/keplerdust
+################################################################################
+#DUST
+################################################################################
+DUSTTOGAS		0.01
+DUSTSIZE		0.1
+FLUIDS			gas/dust
+DUSTDENSFLOOR		1e-25
+CONSTSTOKES			FALSE
+DUSTDIFF            NO     #NO; no turbulent diffusion, YES: diffusio pressure
+BACKREACTION        YES
+SAMPLETSTOP         NO         #do we sample the stopping time
+DUSTMETHOD          1			#0:PLMish, 1:MUSCL
+################################################################################
+
+Flaringindex            0.28
+StellDeg                7.
+Tstar                   5780.             temperature of the star in Kelvin
+Rstar                   1.0                star radius in unit of the Sun Radius
+
+DT                      0.628318530718
+NINTERM                 100
+NTOT                    1500
+NODAMPING               YES
+
+METHOD			MUSCL
+
+HighResLevel            4
+VISCUTOFFLEVEL          100
+
+
+#GRIDINFO
+-3.141592653   0.40005  1.4415764   3.141592653    2.3845  1.57079632679489 0 0 30 99 0 30 1
+#-1.1 0.5385 1.45449 1.1 1.4615 1.57079632679489    1 0 0 0 0 0 1

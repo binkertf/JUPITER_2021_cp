@@ -1,0 +1,80 @@
+CoordType						Spherical
+CoordPermut        	213   # Azimuth, Radius and Colatitude
+
+Size1               680
+#Size1            		2
+Size2            		215   # Strangely, below 120 cells, it crashes
+Size3            		20
+
+Range2Low        		0.40005
+Range2High        	2.3845
+Range1Low        		-3.141592653
+Range1High        	3.141592653
+Range3Low          	1.4415764
+Range3High          1.57079632679489
+
+NDIM            		3
+
+Dim1Periodic        True
+Keplerian           True
+HALFDISK            YES
+SMRATIO							2.0
+
+################################################################################
+# STAR
+################################################################################
+XMSTAR		       		1.0
+STELLAR             YES
+StellDeg            7.
+Tstar               5780.             temperature of the star in Kelvin
+Rstar               1.0               star radius in unit of the Sun Radius
+################################################################################
+# PLANET / GASDISK
+################################################################################
+R0                  7.48e14   #cm (50au)
+#PLANETMASS         	0.0
+PLANETMASS         1.0e-3
+MASSTAPER           100
+ASPECTRATIO         0.05
+Viscosity           1.0e-5
+SIGMA0              3.182e-3
+SIGMASLOPE          0.5
+GAMMA	              1.43
+ADIABATIC           YES
+Flaringindex        0.28
+
+PotentialCode       planet3d
+ExternalPotential   True
+InitCode            kepler3d/keplerdust
+RIEMANNSOLVER				2S
+METHOD							MUSCL
+
+OmegaFrame          1.0004998750624609
+
+FLUIDS						 	gas/dust
+################################################################################
+# DUST
+################################################################################
+DUSTTOGAS						0.01
+DUSTSIZE						0.1
+DUSTSOLIDRHO 				3.0
+DUSTDENSFLOOR				1e-20
+BACKREACTION        YES 
+DUSTDIFF						FALSE
+SAMPLETSTOP         NO         #do we sample the stopping time
+DUSTMETHOD          1
+SCHMIDTNUMBER       1.0   #D_D = VISCOSITY / SCHMIDTNUMBER
+################################################################################
+# NUMERICS
+################################################################################
+OUTPUTDIR           /e/ocean1/fbinkert/adiab_diff_2022/m50au1jup
+DT                  6.28318530718
+NINTERM             1
+NTOT                200
+
+NODAMPING           YES
+HighResLevel        1
+VISCUTOFFLEVEL      100
+################################################################################
+#GRIDINFO
+-3.141592653   0.40005  1.4415764   3.141592653    2.3845  1.57079632679489 0 0 30 99 0 30 1

@@ -1,0 +1,61 @@
+CoordType        Cartesian
+CoordPermut      123
+
+Size1            1000
+Size2            1
+Size3            1
+
+Range1Low        -2.0
+Range1High       2.0
+
+Range2Low        0.0
+Range2High       0.0
+
+Range3Low        0.0
+Range3High       0.0
+
+NDIM              1
+
+Viscosity         0.1
+
+InitCode             athena_1_g/athena_1_d_2
+
+RIEMANNSOLVER	     2S
+
+R0                  1.0
+XMSTAR              1.0
+
+Dim1Periodic         True
+OUTPUTDIR		    /e/ldata/users/fbinkert/diff/1D_tests_2022/athena_massdiff
+#OUTPUTDIR		    /e/ldata/users/fbinkert/diff/1D_tests_2022/athena_diffpres
+Keplerian            FALSE
+ExternalPotential   	FALSE
+
+FLUIDS                  gas/dust
+COURANTNUMBER                       0.4
+
+DUSTDENSFLOOR						1e-15
+
+CS                  1.0
+DIFFMODE               2    #0: no turbulent diffusion / 1: diffusion pressure / 2: mass diffusion
+CONSTSTOKES			TRUE
+STOKESNUMBER        		0.1
+DUSTTOGAS           		0.01
+DUSTSIZE		1.0
+DUSTSOLIDRHO 		1.0
+BACKREACTION        YES
+SLIMITER            MINMOD  #MINMOD / SUPERBEE
+
+
+DT                   0.05
+NINTERM              1
+NTOT                 10
+NODAMPING            YES
+
+OUTPUTATREFINEMENT      500
+FINESTLEVEL             1
+
+METHOD			MUSCL
+
+#GRIDINFO
+-2.0  2.0   0 0 0

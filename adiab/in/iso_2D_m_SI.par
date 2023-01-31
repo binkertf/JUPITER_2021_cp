@@ -1,0 +1,66 @@
+# This is a 2D two-fluid isothermal setup (gas + dust)
+################################################################################
+# GRID
+################################################################################
+CoordType        		Cylindrical
+CoordPermut      		213
+
+Size1            		1024             #number of azimuthal cells
+Size2            		1024             #number ofradial cells
+Size3            		1               #number of vertical cells
+
+Range2Low        		0.9            #if you change anything here, don't forget to also change the GRIDINFO at the bottom of this file (and vice versa)
+Range2High       		1.1
+Range1Low        		-0.1
+Range1High        		0.1
+Range3Low        		0.0
+Range3High       		0.0
+
+NDIM              		2
+Dim1Periodic        		True
+Keplerian           		True
+################################################################################
+# PLANET / GASDISK
+################################################################################
+R0                  	7.7792e13   #cm (5.2 AU), is needed because the dust grain size is defined in units of cm
+PLANETMASS        		0.0
+MASSTAPER         		10
+ASPECTRATIO       		0.6
+VISCOSITY         		0.0
+SIGMA0            		2.0e-4
+SIGMASLOPE        		1.5
+Gamma             		1.0
+FLARINGINDEX 			0.0
+
+PotentialCode       		planet3d
+ExternalPotential   		True                    #stellar potential
+InitCode            		kepler3d/keplerdust     #initial condition gas/dust
+RIEMANNSOLVER	     		2S
+
+FLUIDS              		gas/dust
+################################################################################
+# DUST
+################################################################################
+DUSTDIFF			FALSE       #dust trubulent diffusion 
+CONSTSTOKES			TRUE       #dust grains have constant size (FALSE) or constant Stokes number (TRUE)
+STOKESNUMBER        1.0       #Stokes number if CONSTSTOKES = TRUE
+DUSTSIZE			0.1         #dust grain radius in units of cm if CONSTSTOKES = FALSE
+DUSTTOGAS           1.0       #dust-to-gas ratio
+DUSTDENSFLOOR		1e-15       #dust density floor value
+SAMPLETSTOP         YES          #do we sample the dust stopping time
+BACKREACTION         YES
+DUSTMETHOD             1        #0: pressureless 2, 1: muscl
+################################################################################
+# NUMERICS
+################################################################################
+NODAMPING           		NO          #wave damping at the radial boundaries
+METHOD				MUSCL               #numerical reconstruction scheme (GFO / PLM / MUSCL)
+
+OUTPUTDIR			/e/ocean1/fbinkert/adiab_diff_2022/iso_2D_m_SI
+OmegaFrame          		1.0            #sqrt(1+PLANETMASS)
+DT                  		6.28318530718   #output timestep (not computational timestep), one planet orbit is equal to 2*pi
+NINTERM             		1              #one output after NINTERM output timsteps (DT)
+NTOT                		10             #nomber of total output timesteps. The total nuber of outputs is NTOT/NINTERM
+################################################################################
+#GRIDINFO
+-0.1   0.9  0.1    1.1   0 0 4 0 4

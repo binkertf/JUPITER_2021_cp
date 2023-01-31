@@ -1,0 +1,91 @@
+/********************************/
+/*                              */
+/* This file is created         */
+/* automatically during         */
+/* compilation. Do not edit.    */
+/* See perl script              */
+/* "potparser.pl" for details   */
+/*                              */
+/********************************/
+if (NeverTested) {
+    testpotdoubledefined (PotentialCode, pot);
+    NeverTested = FALSE;
+}
+switch (PotentialCode) {
+case vkoffring2d:
+	y = radius * sin(colatitude); /* y is a work variable */
+	z = radius*cos(colatitude);
+	pot = -1.0/y+.5*1e-3/0.15*(z-1.0)*(z-1.0);
+	break;
+case isoatm:
+	pot = z+1e5;
+	break;
+case isoatm2d:
+	pot = 2.*x+1.*y+1e5;
+	break;
+case planet3d:
+	pot = keplerian_pot(radius, azimuth, colatitude);
+	break;
+case planet2d:
+	pot = keplerian_pot(radius, azimuth, colatitude);
+	break;
+case kepler:
+	pot = -1.0/radius;
+	break;
+case null:
+	pot = 1.0;
+	break;
+case homogeneity1:
+	pot = -1.0/radius;
+	break;
+case homogeneity2:
+	pot = -2.0e30*6.67e-11/radius;
+	break;
+case GalacticCyl:
+	pot = 4.0e4*log(radius)+50./70./70.*z*z;
+	break;
+case plan1d:
+	pot = SMOOTHING*log(z)+1e5;
+	break;
+case star1d:
+	pot = SMOOTHING*.5*z*z+1e5;
+	break;
+case planet2d_noind:
+	pot = -1./radius;
+	pot -= PLANETMASS\
+	/(sqrt(1.+radius*radius-2*radius*cos(azimuth)+SMOOTHING*SMOOTHING));
+	break;
+case planetersatzt_norad:
+	pot = -1./radius;
+	pot -= PLANETMASS\
+	/(sqrt(azimuth*azimuth+SMOOTHING*SMOOTHING));
+	break;
+case planet2d_trunc:
+	pot = -1./radius;
+	x = sqrt(1.+radius*radius-2.*radius*cos(azimuth));
+	if (x > 0.02) x = 0.02;
+	pot -= PLANETMASS/sqrt(x*x+SMOOTHING*SMOOTHING);
+	break;
+case planet_incli:
+	work1 = cos(t);
+	yp = sin(t);
+	xp = radius*cos(INCLINATION);
+	zp = radius*sin(INCLINATION);
+	x = radius*cos(azimuth)*sin(colatitude);
+	y = radius*sin(azimuth)*sin(colatitude);
+	z = radius*cos(colatitude);
+	pot = -1./radius;
+	pot -= PLANETMASS/sqrt((x-xp)*(x-xp)+(y-yp)*(y-yp)+(z-zp)*(z-zp)+SMOOTHING*SMOOTHING);
+	break;
+case tide:
+	work1 = (0.01-OMEGAFRAME)*t;
+	work2 = cos(azimuth-work1)*radius*sin(colatitude);
+	pot = work2*work2*1e-5;
+	break;
+case throop:
+	pot = -1.0/sqrt(x*x+y*y+z*z+1e-2);
+	break;
+default:
+	testundefpot (pot);
+	break;
+}

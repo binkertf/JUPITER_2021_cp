@@ -1,0 +1,89 @@
+# This is a radiative setup (gas + dust)
+################################################################################
+# GRID
+################################################################################
+CoordType		Spherical
+CoordPermut        	213   # Azimuth, Radius and Colatitude
+
+#Size1              	320
+Size1            	2
+Size2            	150   # Strangely, below 120 cells, it crashes
+Size3            	20
+
+Range2Low        	0.5
+Range2High        	2.5
+Range1Low        	-3.141592653
+Range1High        	3.141592653
+Range3Low          	1.4415764
+Range3High          1.57079632679489
+
+NDIM            	3
+
+Dim1Periodic        	True
+Keplerian           	True
+HALFDISK            	YES
+SMRATIO			2.0
+
+################################################################################
+# STAR
+################################################################################
+XMSTAR		    	1.0
+STELLAR             	YES #radiative module
+StellDeg            	7.
+Tstar               	5780.             #temperature of the star in Kelvin
+Rstar               	1.0               #stellar radius in unit of the solar sadius
+################################################################################
+# PLANET / GASDISK
+################################################################################
+#R0                  	4.488e14   #cm (30 AU)
+R0                  	7.7792e13   #cm (5 AU)
+PLANETMASS         	0.0
+#PLANETMASS          	1.0e-3
+MASSTAPER           	5
+ASPECTRATIO         	0.05
+Viscosity           	1.0e-5 #5.0e-6
+SIGMA0              	0.0001067
+SIGMASLOPE          	0.5
+GAMMA	              	1.43
+ADIABATIC           	YES
+Flaringindex        	0.28
+
+PotentialCode       	planet3d
+ExternalPotential   	True
+InitCode            	kepler3d/keplerdust
+RIEMANNSOLVER		2S
+METHOD			MUSCL   #GFO / PLM / MUSCL
+
+OmegaFrame          	1.0
+
+FLUIDS			gas/dust
+################################################################################
+# DUST
+################################################################################
+DUSTTOGAS		0.01
+DUSTSIZE		0.1 #cm
+DUSTSOLIDRHO 		3.0
+DUSTDENSFLOOR		1e-15
+
+CONSTSTOKES			FALSE
+DUSTDIFF            YES     #NO; no turbulent diffusion, YES: diffusio pressure
+#DIFFMODE               1    #0: no turbulent diffusion / 1: diffusion pressure / 2: mass diffusion
+BACKREACTION        YES    
+SAMPLETSTOP         NO         #do we sample the stopping time
+################################################################################
+# NUMERICS
+################################################################################
+OUTPUTDIR           	/home/moon/fbinkert/JUPITER_2021/adiab/data
+#OUTPUTDIR           	/home/moon/fbinkert/hydro/data/DM1_CS_1em2
+DT                  	6.28318530718
+NINTERM             	1
+NTOT                	10
+
+#COURANTNUMBER           0.8
+NODAMPING           	YES
+HighResLevel        	2
+VISCUTOFFLEVEL      	100
+################################################################################
+#GRIDINFO
+-3.141592653   0.5  1.4415764   3.141592653    2.5  1.57079632679489 0 0 30 99 0 30 1
+#-0.274889357 0.7333333 1.467420385358978 0.274889357 1.2666666667 1.57079632679489    1 0 0 0 0 0 1
