@@ -271,6 +271,9 @@ void FluidCoupling (item, dt)
       }
     }
   }
+  free(v);
+  free(d);
+  free(cs);
 }
 
 
@@ -365,6 +368,9 @@ void MultifluidDiffusionPressure (item, dt)	/* Turbulent diffusion pressure in d
       }
     }
   }
+  free(v);
+  free(d);
+  free(cs);
 }
 
 /* a funtion that sets the dust energy to zero when there is no diffusion pressure */
@@ -412,4 +418,7 @@ void MultifluidDustEnergyToZero (item, dt)	/* Turbulent diffusion pressure in du
       }
     }
   }
+  free(v);
+  free(d);
+  free(cs);
 }
